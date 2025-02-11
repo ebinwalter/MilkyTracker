@@ -198,11 +198,13 @@ PatternEditorControl::PatternEditorControl(pp_int32 id, PPScreen* parentScreen, 
 #endif
 
 	editMenuControl->setFont(font);
-	moduleMenuControl->setFont(font);
-	patternMenuControl->setFont(font);
-	keyboardMenuControl->setFont(font);
-	channelMenuControl->setFont(font);
-	helpMenuControl->setFont(font);
+	if (!parentScreen->getClassic()) {
+		moduleMenuControl->setFont(font);
+		patternMenuControl->setFont(font);
+		keyboardMenuControl->setFont(font);
+		channelMenuControl->setFont(font);
+		helpMenuControl->setFont(font);
+	}
 		
 	setRecordMode(false);
 	
