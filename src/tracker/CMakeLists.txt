@@ -255,6 +255,7 @@ endif()
 target_include_directories(tracker
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
+		${link_HEADERS}
         # Include the CMake-generated version header from the build directory
         ${PROJECT_BINARY_DIR}/src/tracker
 )
@@ -433,6 +434,9 @@ else()
         target_compile_definitions(tracker PRIVATE -DHAVE_LIBRTMIDI)
         target_link_libraries(tracker midi)
     endif()
+	if(EXISTS $ENV{ABLETON_LINK_DIR})
+		target_link_libraries(tracker Ableton::Link)
+	endif()
 endif()
 
 if(ZLIB_FOUND)
@@ -447,6 +451,10 @@ if(UNIX)
     if(LHASA_FOUND)
         target_link_libraries(tracker ${LHASA_LIBRARIES})
     endif()
+
+	if (LINK_FOUND)
+		target_link_libraries(tracker ${ABLETON_LINK_DIR})
+	endif()
 endif()
 
 # OS X and Windows install to the root of the prefix, the others install to bin

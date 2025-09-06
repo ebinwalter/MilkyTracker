@@ -22,6 +22,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(MilkyTracker)
 
+set($ENV{LINK_PLATFORM_LINUX} 1)
 # Set C++ standard to C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -164,7 +165,7 @@ elseif(HAIKU)
 else()
     # Workaround for SDL bug #3295, which occurs in SDL2 <2.0.5
     # https://bugzilla.libsdl.org/show_bug.cgi?id=3295
-    cmake_policy(SET CMP0004 OLD)
+	# cmake_policy(SET CMP0004 OLD)
 
     find_package(SDL2 REQUIRED)
 endif()
@@ -174,6 +175,8 @@ if(APPLE)
     set(SUFFIXES_ORIG ${CMAKE_FIND_LIBRARY_SUFFIXES})
     set(CMAKE_FIND_LIBRARY_SUFFIXES .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
 endif()
+
+message( ${CMAKE_SYSTEM_NAME})
 
 # Under macOS and Windows we use Git Submodules to locate the decompression libs
 if(UNIX)
@@ -186,6 +189,14 @@ if(UNIX)
       find_package(LHASA)
       find_package(ZZIPLIB)
     endif()
+
+	if(DEFINED ENV{ABLETON_LINK_DIR})
+		if (EXISTS $ENV{ABLETON_LINK_DIR})
+			include($ENV{ABLETON_LINK_DIR}/AbletonLinkConfig.cmake)
+			message("Headers at ${link_HEADERS}")
+		endif()
+	endif()
+
 
     if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         find_package(ALSA)
