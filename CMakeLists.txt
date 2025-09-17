@@ -22,9 +22,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(MilkyTracker)
 
-set($ENV{LINK_PLATFORM_LINUX} 1)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Set C++ standard to C++11
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 11) 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Enable IDE solution folders
@@ -90,6 +90,13 @@ set(CPACK_PACKAGE_VERSION_MINOR ${VER_YY})
 set(CPACK_PACKAGE_VERSION_PATCH ${VER_ZZ})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "FastTracker II compatible music tracker")
 include(CPack)
+
+# Configure Ableton Link if the submodule is present
+set(LINK_DIR ${PROJECT_SOURCE_DIR}/src/submodules/link)
+if(EXISTS ${LINK_DIR}/AbletonLinkConfig.cmake)
+	include(${LINK_DIR}/AbletonLinkConfig.cmake HAS_LINK)
+	add_definitions(-DHAS_LINK)
+endif()
 
 if(APPLE)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
@@ -189,13 +196,6 @@ if(UNIX)
       find_package(LHASA)
       find_package(ZZIPLIB)
     endif()
-
-	if(DEFINED ENV{ABLETON_LINK_DIR})
-		if (EXISTS $ENV{ABLETON_LINK_DIR})
-			include($ENV{ABLETON_LINK_DIR}/AbletonLinkConfig.cmake)
-			message("Headers at ${link_HEADERS}")
-		endif()
-	endif()
 
 
     if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")

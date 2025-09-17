@@ -53,6 +53,7 @@ add_library(milkyplay STATIC
     LoaderULT.cpp
     LoaderUNI.cpp
     LoaderXM.cpp
+	LinkContext.cpp
     MasterMixer.cpp
     PlayerBase.cpp
     PlayerFAR.cpp
@@ -74,11 +75,11 @@ add_library(milkyplay STATIC
     # Headers
     AudioDriverBase.h
     AudioDriverManager.h
-    AudioDriver_COMPENSATE.h
-    AudioDriver_NULL.h
+    AudioDriver_COMPENSATE.h AudioDriver_NULL.h
     AudioDriver_WAVWriter.h
     ChannelMixer.h
     LittleEndian.h
+	LinkContext.h
     Loaders.h
     MasterMixer.h
     MilkyPlay.h
@@ -109,6 +110,7 @@ add_library(milkyplay STATIC
     computed-blep.h
 )
 
+
 target_include_directories(milkyplay
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
@@ -118,6 +120,7 @@ target_include_directories(milkyplay
         ${PROJECT_BINARY_DIR}/src/tracker
 )
 
+target_link_libraries(milkyplay PUBLIC Ableton::Link)
 # Add platform-specific sources, include paths, definitions and link libraries
 if(APPLE)
     target_sources(milkyplay
