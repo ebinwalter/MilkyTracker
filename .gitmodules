@@ -11,6 +11,3 @@
 [submodule "zziplib"]
 	path = src/submodules/zziplib
 	url = https://github.com/gdraheim/zziplib.git
-[submodule "src/submodules/link"]
-	path = src/submodules/link
-	url = https://github.com/Ableton/link

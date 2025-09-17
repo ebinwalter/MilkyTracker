@@ -37,10 +37,6 @@
 
 #include "PlayerBase.h"
 #include "XModule.h"
-#include <ableton/Link.hpp>
-#include <ableton/link/SessionState.hpp>
-#include <chrono>
-#include <cstdio>
 
 mp_sint32 PlayerBase::kick()
 {
@@ -104,8 +100,7 @@ PlayerBase::PlayerBase(mp_uint32 frequency) :
 	patternIndexToPlay = -1;
 	
 	playMode = PlayMode_Auto;	
-	linkContext = new LinkContext(125);
-
+	
 	reallocTimeRecord();
 }
 
@@ -116,7 +111,6 @@ PlayerBase::~PlayerBase()
 	
 	ChannelMixer::closeDevice(); 
 	
-	delete linkContext;
 	delete[] timeRecord;
 }
 
@@ -238,6 +232,7 @@ mp_sint32 PlayerBase::pausePlaying()
 	if (!paused)
 	{
 		ChannelMixer::pause();
+		
 		paused = true;
 	}
 	return MP_OK;
@@ -334,6 +329,7 @@ void PlayerBase::setPatternPos(mp_uint32 pos, mp_uint32 row/* = 0*/, bool resetC
 	}
 }
 
+
 void PlayerBase::timerHandler(mp_sint32 currentBeatPacket)
 {
 	timeRecord[currentBeatPacket] = TimeRecord(poscnt, 
@@ -342,11 +338,4 @@ void PlayerBase::timerHandler(mp_sint32 currentBeatPacket)
 											   tickSpeed, 
 											   mainVolume,
 											   ticker);
-}
-
-void PlayerBase::mix(mp_sint32 *buffer, mp_uint32 numSamples) {
-#ifdef HAS_LINK
-	linkContext->mixHandler(this);
-#endif
-	ChannelMixer::mix(buffer, numSamples);
 }

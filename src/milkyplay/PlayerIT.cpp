@@ -3700,8 +3700,6 @@ void PlayerIT::tickhandler()
 		doTickeffects();	
 		
 		ticker++;
-
-		linkContext->tick();
 		
 		maxTicks = tickSpeed;
 		if (patDelay)
