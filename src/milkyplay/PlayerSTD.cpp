@@ -2919,7 +2919,9 @@ void PlayerSTD::tickhandler()
 		doTickeffects();	
 		
 		ticker++;
-		
+
+		linkContext->tick();
+
 		maxTicks = tickSpeed;
 		if (patDelay)
 			maxTicks = patDelayCount;

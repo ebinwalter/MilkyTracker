@@ -458,7 +458,7 @@ public:
 	
 protected:
 	bool			initialized;
-	bool			startPlay;
+	bool			startPlay = false;
 
 	mp_int64		sampleCounter;			// number of samples played (per song)
 
