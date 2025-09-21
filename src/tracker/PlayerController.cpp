@@ -30,7 +30,6 @@
 
 #include "PlayerController.h"
 #include "PlayerMaster.h"
-#include "MilkyPlay.h"
 #include "ResamplerMacros.h"
 #include "PPSystem.h"
 #include "PlayerCriticalSection.h"
@@ -402,6 +401,9 @@ void PlayerController::playSong(mp_sint32 startIndex, mp_sint32 rowPosition, boo
 		player->muteChannel(i, muteChannels[i]);
 		this->muteChannels[i] = muteChannels[i];
 	}
+#ifdef HAS_LINK
+	player->linkContext->onStart();
+#else
 	player->restart(startIndex, rowPosition, false, panning);
 	player->setIdle(false);
 	//resetPlayTimeCounter();
@@ -409,6 +411,7 @@ void PlayerController::playSong(mp_sint32 startIndex, mp_sint32 rowPosition, boo
 	patternPlay = false;
 	playRowOnly = false;
 	patternIndex = 0;
+#endif
 
 	criticalSection->leave(false);
 }
@@ -497,9 +500,13 @@ void PlayerController::stop(bool bResetMainVolume/* = true*/)
 	
 	readjustSpeed();
 
+#if HAS_LINK
+	player->linkContext->onPause();
+#else
 	player->setIdle(true);
 	reset();
 	player->restart(0, 0, true, panning);
+#endif
 
 	// muting has been reset, restore it
 	for (mp_sint32 i = 0; i < numPlayerChannels; i++)
@@ -514,6 +521,7 @@ void PlayerController::stop(bool bResetMainVolume/* = true*/)
 		
 	setNextOrderToPlay(-1);
 	setNextPatternToPlay(-1);
+
 
 	criticalSection->leave(false);
 }
@@ -649,8 +657,12 @@ mp_sint32 PlayerController::getNextPatternToPlay() const
 
 void PlayerController::pause()
 {
+	printf("PlayerController::pause\n");
 	if (player)
 		player->pausePlaying();
+#if HAS_LINK
+	player->linkContext->onPause();
+#endif
 }
 
 void PlayerController::unpause()
