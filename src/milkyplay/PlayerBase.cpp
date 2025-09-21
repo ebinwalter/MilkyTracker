@@ -104,7 +104,10 @@ PlayerBase::PlayerBase(mp_uint32 frequency) :
 	patternIndexToPlay = -1;
 	
 	playMode = PlayMode_Auto;	
-	linkContext = new LinkContext(125);
+
+#ifdef HAS_LINK
+	linkContext = new LinkContext(this, 125);
+#endif
 
 	reallocTimeRecord();
 }
@@ -237,8 +240,12 @@ mp_sint32 PlayerBase::pausePlaying()
 {
 	if (!paused)
 	{
+#ifdef HAS_LINK
+		linkContext->onPause();
+#else
 		ChannelMixer::pause();
 		paused = true;
+#endif
 	}
 	return MP_OK;
 }
@@ -346,7 +353,7 @@ void PlayerBase::timerHandler(mp_sint32 currentBeatPacket)
 
 void PlayerBase::mix(mp_sint32 *buffer, mp_uint32 numSamples) {
 #ifdef HAS_LINK
-	linkContext->mixHandler(this);
+	linkContext->onMix();
 #endif
 	ChannelMixer::mix(buffer, numSamples);
 }

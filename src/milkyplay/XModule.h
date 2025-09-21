@@ -67,8 +67,8 @@ struct TXMHeader
 	mp_ubyte	uppernotebound;	// additional: note limit if not zero
 	mp_sbyte	relnote;		// additional: semitone adjust value
 	mp_dword    flags;			// additional: some flags 
-	mp_uword	tempo;
-	mp_uword	speed;
+	mp_uword	tempo;			// tick rate
+	mp_uword	speed;			// tempo in BPM assuming 6 ticks per line
 	mp_uword	mainvol;
 	mp_ubyte	ord[MP_MAXORDERS];
 	mp_ubyte	pan[256];

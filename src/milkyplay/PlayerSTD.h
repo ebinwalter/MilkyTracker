@@ -445,6 +445,7 @@ private:
 
 protected:
 	virtual void	clearEffectMemory();
+	virtual void	updateAdder() { adder = getbpmrate(bpm); }
 	
 public:
 					PlayerSTD(mp_uint32 frequency,

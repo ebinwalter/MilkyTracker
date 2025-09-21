@@ -717,6 +717,7 @@ private:
 
 protected:
 	virtual void	clearEffectMemory();
+	virtual void	updateAdder() { adder = getbpmrate(bpm); }
 	
 public:
 					PlayerIT(mp_uint32 frequency);

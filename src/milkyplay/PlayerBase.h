@@ -178,6 +178,8 @@ protected:
 
   virtual void clearEffectMemory() {}
 
+  virtual void updateAdder() {}
+
 public:
   PlayerBase(mp_uint32 frequency);
 

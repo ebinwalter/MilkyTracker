@@ -2920,7 +2920,7 @@ void PlayerSTD::tickhandler()
 		
 		ticker++;
 
-		linkContext->tick();
+		linkContext->onTick();
 
 		maxTicks = tickSpeed;
 		if (patDelay)

@@ -550,6 +550,10 @@ protected:
 	friend class PlayerController;
 #endif
 
+#ifdef HAS_LINK
+	friend class LinkContext;
+#endif
+
 #ifdef __MPTIMETRACKING__
 public:
 	void mixData(mp_sint32 c, 
