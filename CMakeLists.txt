@@ -23,6 +23,7 @@ cmake_minimum_required(VERSION 3.10)
 project(MilkyTracker)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_BUILD_TYPE Debug)
 # Set C++ standard to C++11
 set(CMAKE_CXX_STANDARD 11) 
 set(CMAKE_CXX_EXTENSIONS OFF)
