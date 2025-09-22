@@ -45,10 +45,8 @@ public:
 	// Handlers of other events
 	// Called when the ticker increments
 	void onTick();
-	// Called when the player pauses of its own accord
+	// Called when we want to pause the player
 	void onPause();
-	// Called when the player halts
-	void onHalt();
 	// Called every time a block of audio is mixed
 	void onMix();
 	// Called when we request that playback starts (i.e., the start
