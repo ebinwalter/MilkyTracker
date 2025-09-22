@@ -1,11 +1,7 @@
-#ifdef HAS_LINK
-#ifndef LINKCONTEXT_H
+#if defined(HAS_LINK) && !defined(LINKCONTEXT_H)
 #define LINKCONTEXT_H
 
 class PlayerBase;
-class PlayerIT;
-class PlayerSTD;
-class PlayerFAR;
 
 #include "MilkyPlayTypes.h"
 #include <ableton/Link.hpp>
@@ -28,6 +24,7 @@ private:
 	mp_sint32 ticksToSkip = 0;
 	bool iPaused = false;
 	bool amPlaying = false;
+	bool testVar = true;
 
 public:
 	LinkContext(PlayerBase *player, mp_sint32 bpm);
@@ -65,5 +62,4 @@ public:
 	LinkContext& operator=(const LinkContext&) = delete;
 };
 
-#endif
 #endif

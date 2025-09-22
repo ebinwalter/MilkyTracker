@@ -37,6 +37,7 @@
 
 #include "PlayerBase.h"
 #include "XModule.h"
+#include "LinkContext.h"
 #include <ableton/Link.hpp>
 #include <ableton/link/SessionState.hpp>
 #include <chrono>

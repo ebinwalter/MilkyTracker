@@ -36,6 +36,7 @@
  *
  */
 #include "PlayerIT.h"
+#include "LinkContext.h"
 
 // if we're in background we work on our own state
 // if not, we're just going to work on the host state

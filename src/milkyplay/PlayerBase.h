@@ -38,10 +38,10 @@
 #ifndef __PLAYERBASE_H__
 #define __PLAYERBASE_H__
 
-#include "LinkContext.h"
 #include "ChannelMixer.h"
 
 class XModule;
+class LinkContext;
 
 struct TPlayerChannelInfo {
   mp_ubyte note;

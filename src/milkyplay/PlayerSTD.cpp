@@ -34,6 +34,7 @@
  *
  */
 #include "PlayerSTD.h"
+#include "LinkContext.h"
 
 #define CHANNEL_FLAGS_DVS				0x10000
 #define CHANNEL_FLAGS_DFS				0x20000

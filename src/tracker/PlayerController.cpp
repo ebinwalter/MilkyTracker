@@ -34,6 +34,7 @@
 #include "PPSystem.h"
 #include "PlayerCriticalSection.h"
 #include "ModuleEditor.h"
+#include "LinkContext.h"
 
 class PlayerStatusTracker : public PlayerSTD::StatusEventListener
 {
