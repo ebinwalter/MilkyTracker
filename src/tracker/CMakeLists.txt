@@ -129,6 +129,7 @@ add_executable(tracker
     SectionSettings.cpp
     SectionSwitcher.cpp
     SectionTranspose.cpp
+	SectionLink.cpp
     SectionUpperLeft.cpp
     SystemMessage.cpp
     fx/Filter.cpp

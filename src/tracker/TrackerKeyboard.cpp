@@ -696,6 +696,14 @@ void Tracker::eventKeyDownBinding_InvokeSectionAbout()
 	sectionSwitcher->showUpperSection(sectionAbout);
 }
 
+void Tracker::eventKeyDownBinding_InvokeSectionLink()
+{
+	if (screen->getModalControl() && screen->getClassic())
+		return;
+
+	sectionSwitcher->showBottomSection(SectionSwitcher::ActiveBottomSectionLink);
+}
+
 void Tracker::eventKeyDownBinding_ToggleFT2Edit()
 {
 	PPContainer* container = static_cast<PPContainer*>(screen->getControlByID(CONTAINER_MENU));

@@ -74,6 +74,7 @@ class SectionSamples;
 class SectionQuickOptions;
 class SectionOptimize;
 class SectionAbout;
+class SectionLink;
 
 class PatternEditorControl;
 class InputControlListener;
@@ -149,6 +150,7 @@ private:
 	SectionQuickOptions* sectionQuickOptions;
 	SectionOptimize* sectionOptimize;
 	SectionAbout* sectionAbout;
+	SectionLink* sectionLink;
 	
 	InputControlListener* inputControlListener;
 	
@@ -561,6 +563,7 @@ private:
 	void eventKeyDownBinding_InvokeSectionQuickOptions();
 	void eventKeyDownBinding_InvokeSectionOptimize();
 	void eventKeyDownBinding_InvokeSectionAbout();
+	void eventKeyDownBinding_InvokeSectionLink();
 	
 	// Some handy shortcuts
 	void eventKeyDownBinding_ToggleFT2Edit();
@@ -633,6 +636,7 @@ private:
 	friend class SectionQuickOptions;
 	friend class SectionOptimize;
 	friend class SectionAbout;
+	friend class SectionLink;
 
 	friend class InputControlListener;
 	friend class SampleLoadChannelSelectionHandler;

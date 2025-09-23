@@ -767,7 +767,7 @@ void Tracker::initSectionMainOptions(pp_int32 x, pp_int32 y)
 	{
 		for (i = 0; i < 4; i++)
 		{
-			if (j * 4 + i < 15)
+			if (j * 4 + i < 16)
 			{
 				button = new PPButton(BUTTON_MENU_ITEM_0 + j*4+i, screen, this, PPPoint(x+4 + i*78, y + 3 + j*bHeight), PPSize(77, bHeight-1));
 				button->setText("Unused");
@@ -775,7 +775,6 @@ void Tracker::initSectionMainOptions(pp_int32 x, pp_int32 y)
 				container->addControl(button);
 			}
 		}
-		
 	}
 
 	static_cast<PPButton*>(container->getControlByID(MAINMENU_PLAY_SONG))->setText("Play Sng");	
@@ -819,6 +818,7 @@ void Tracker::initSectionMainOptions(pp_int32 x, pp_int32 y)
 	static_cast<PPButton*>(container->getControlByID(MAINMENU_QUICKOPTIONS))->setText("Options");
 	static_cast<PPButton*>(container->getControlByID(MAINMENU_OPTIMIZE))->setText("Optimize");
 	static_cast<PPButton*>(container->getControlByID(MAINMENU_ABOUT))->setText("About");
+	static_cast<PPButton*>(container->getControlByID(MAINMENU_LINK))->setText("Link");
 
 	// add/subtract channels
 	button = new PPButton(BUTTON_MENU_ITEM_ADDCHANNELS, screen, this, PPPoint(x+4 + 3*78, y + 3 + 3*bHeight), PPSize((77>>1) - 1, bHeight-1));
@@ -861,10 +861,11 @@ void Tracker::initSectionMainOptions(pp_int32 x, pp_int32 y)
 		static_cast<PPButton*>(container->getControlByID(MAINMENU_CONFIG))->setText( "config");
 		static_cast<PPButton*>(container->getControlByID(MAINMENU_INSEDIT))->setText("instr");
 		static_cast<PPButton*>(container->getControlByID(MAINMENU_SMPEDIT))->setText("sample");
-    // extra follow button to transportbar
-    button = new PPButton(BUTTON_ABOUT_FOLLOWSONG, screen, this, PPPoint(0,0), PPSize(12, 9));
-    button->setText("\x19");
-    container->addControl(button);
+		static_cast<PPButton*>(container->getControlByID(MAINMENU_LINK))->setText("link");
+		// extra follow button to transportbar
+		button = new PPButton(BUTTON_ABOUT_FOLLOWSONG, screen, this, PPPoint(0,0), PPSize(12, 9));
+		button->setText("\x19");
+		container->addControl(button);
 //		static_cast<PPButton*>(container->getControlByID(MAINMENU_INSEDIT))->setColor(TrackerConfig::colorHighLight_1);
 //		static_cast<PPButton*>(container->getControlByID(MAINMENU_SMPEDIT))->setColor(TrackerConfig::colorHighLight_1);
 
@@ -879,8 +880,8 @@ void Tracker::initSectionMainOptions(pp_int32 x, pp_int32 y)
 		PPButton *btn;
 		pp_int32 btnID = 0;
 		pp_int32 x = 1;
-		pp_uint32 btns_transport[10] = { 
-      BUTTON_ABOUT_FOLLOWSONG,
+		pp_uint32 btns_transport[11] = { 
+		    BUTTON_ABOUT_FOLLOWSONG,
 			MAINMENU_PLAY_SONG,
 			MAINMENU_PLAY_PATTERN,
 			MAINMENU_STOP,
@@ -889,7 +890,7 @@ void Tracker::initSectionMainOptions(pp_int32 x, pp_int32 y)
 			MAINMENU_INSEDIT,
 			MAINMENU_SMPEDIT,
 			MAINMENU_CONFIG,
-			MAINMENU_HELP
+			MAINMENU_LINK,
 		};
 
 
@@ -907,16 +908,18 @@ void Tracker::initSectionMainOptions(pp_int32 x, pp_int32 y)
 			if( btnID == MAINMENU_EDIT           ) size.width =  14;
 			if( btnID == MAINMENU_SMPEDIT        ) size.width += 31;
 			if( btnID == MAINMENU_LOAD           ) size.width += 15;
-			if( btnID == MAINMENU_CONFIG         ) size.width += 10;
-			if( btnID == MAINMENU_HELP           ){
+			if( btnID == MAINMENU_CONFIG         ) {
 				size.width += 10;
-				loc.x -= size.width+1;
+			}
+			if( btnID == MAINMENU_LINK			 ) {
+				size.width += 10;
+				loc.x -= size.width + 1;
 				loc.y += size.height;
 			}
 			btn->setSize( size );
 			btn->setLocation( loc );
 			if( i > 0 && i < 4 ) btn->setColor(TrackerConfig::colorHighLight_1);
-			if( btnID == MAINMENU_CONFIG || btnID == MAINMENU_HELP ) 
+			if( btnID == MAINMENU_CONFIG || btnID == MAINMENU_HELP || btnID == MAINMENU_LINK ) 
 				btn->setFont( PPFont::getFont(PPFont::FONT_TINY) );
 			x += (size.width+1);
 		}

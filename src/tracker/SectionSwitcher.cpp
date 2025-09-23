@@ -34,6 +34,7 @@
 #include "Container.h"
 #include "SectionInstruments.h"
 #include "SectionSamples.h"
+#include "SectionLink.h"
 #include "ScopesControl.h"
 #include "PatternEditorControl.h"
 
@@ -60,6 +61,8 @@ void SectionSwitcher::showBottomSection(ActiveBottomSections section, bool paint
 		case ActiveBottomSectionSampleEditor:
 			tracker.sectionSamples->show(false);
 			break;
+		case ActiveBottomSectionLink:
+			tracker.sectionLink->show(false);
 		case ActiveBottomSectionNone:
 			break;
 	}
@@ -77,6 +80,8 @@ void SectionSwitcher::showBottomSection(ActiveBottomSections section, bool paint
 		case ActiveBottomSectionSampleEditor:
 			tracker.sectionSamples->show(true);
 			break;
+		case ActiveBottomSectionLink:
+			tracker.sectionLink->show(true);
 		case ActiveBottomSectionNone:
 			tracker.rearrangePatternEditorControl();
 			break;

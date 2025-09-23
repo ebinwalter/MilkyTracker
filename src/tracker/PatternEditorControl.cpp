@@ -1546,6 +1546,7 @@ void PatternEditorControl::executeMenuCommand(pp_int32 commandId)
 		case MAINMENU_OPTIMIZE:
 		case MAINMENU_HELP:
 		case MAINMENU_ABOUT:
+		case MAINMENU_LINK:
 		case BUTTON_ABOUT_FOLLOWSONG:
 		case BUTTON_OCTAVE_PLUS:
 		case BUTTON_OCTAVE_MINUS:

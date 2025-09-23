@@ -61,6 +61,7 @@
 #include "SectionQuickOptions.h"
 #include "SectionOptimize.h"
 #include "SectionAbout.h"
+#include "SectionLink.h"
 
 #include "InputControlListener.h"
 
@@ -188,6 +189,8 @@ Tracker::Tracker() :
 	sections->add(sectionOptimize);
 	sectionAbout = new SectionAbout(*this);
 	sections->add(sectionAbout);
+	sectionLink = new SectionLink(*this);
+	sections->add(sectionLink);
 
 	inputControlListener = new InputControlListener(*this);
 
@@ -940,6 +943,16 @@ pp_int32 Tracker::handleEvent(PPObject* sender, PPEvent* event)
 					break;
 					
 				eventKeyDownBinding_InvokeSectionAbout();
+				break;
+			}
+
+			// settings
+			case MAINMENU_LINK:
+			{
+				if (event->getID() != eCommand)
+					break;
+					
+				eventKeyDownBinding_InvokeSectionLink();
 				break;
 			}
 			
